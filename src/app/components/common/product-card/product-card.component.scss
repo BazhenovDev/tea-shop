@@ -1,0 +1,12 @@
+.card {
+  &-text {
+    max-height: 200px;
+    overflow-y: scroll;
+  }
+  &-image {
+    img {
+      max-height: 200px;
+      object-fit: contain;
+    }
+  }
+}

@@ -1,1 +1,39 @@
-/* You can add global styles to this file, and also import other style files */
+html, body {
+  height: 100vh;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.nav-link.active {
+  opacity: 1 !important;
+}
+
+.acc-title {
+  position: relative;
+}
+
+.accordion-title {
+  position: relative;
+}
+
+.accordion-title {
+  position: relative;
+}
+
+@keyframes loader-animate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

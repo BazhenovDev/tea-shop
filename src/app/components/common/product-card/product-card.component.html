@@ -1,0 +1,11 @@
+<div class="card">
+  <a class="image-wrap card-image" [routerLink]="['/catalog', product.id]">
+    <img src="{{product.image}}" class="card-img-top" alt="1">
+  </a>
+  <div class="card-body">
+    <h4 class="card-title fw-bold">{{ product.title }}</h4>
+    <p class="card-text">{{ product.description }}</p>
+    <a [routerLink]="['/catalog', product.id]" class="btn btn-primary w-100">Подробнее</a>
+  </div>
+</div>
+

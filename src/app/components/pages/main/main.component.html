@@ -1,0 +1,30 @@
+<section class="main">
+<section class="slider-wrapper">
+  <div class="container">
+    <div class="row">
+      <section class="slider">
+        <slider-component></slider-component>
+      </section>
+    </div>
+  </div>
+</section>
+
+<section class="questions py-5">
+  <div class="container">
+    <h3 class="title text-center fw-bold fs-2 mb-5">Ответы на часто задаваемые вопросы</h3>
+    <accordion-component *ngFor="let question of questions" [question]="question"></accordion-component>
+  </div>
+</section>
+
+<section class="modal" #modal>
+  <div class="modal-wrapper">
+    <span class="modal-close" (click)="closeModal()">&#x2715;</span>
+    <div class="modal-text">
+      Посмотрите наши чайные коллекции
+    </div>
+    <a class="modal-button btn btn-primary" routerLink="catalog">Смотреть</a>
+  </div>
+</section>
+
+  <loader-component *ngIf="showLoader"></loader-component>
+</section>

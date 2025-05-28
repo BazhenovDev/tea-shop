@@ -1,0 +1,16 @@
+<section class="product">
+  <div class="product-wrapper">
+    <div class="product-image">
+      <img src="{{product.image}}" alt="">
+    </div>
+    <div class="product-info">
+      <h2 class="product-title">{{ product.title }}</h2>
+      <p class="product-description"> {{ product.description }} </p>
+      <p class="product-price">Цена: <span>{{ product.price }}</span> руб / 25гр</p>
+      <button class="product-button btn btn-success" (click)="clickOnBuyButton()">Купить</button>
+      <a routerLink="/catalog" class="product-button btn btn-primary">Вернуться в каталог</a>
+    </div>
+  </div>
+
+  <loader-component *ngIf="showLoader"></loader-component>
+</section>

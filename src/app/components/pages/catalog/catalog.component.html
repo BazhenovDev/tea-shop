@@ -1,0 +1,16 @@
+<section class="cards">
+  <div class="container py-4">
+    <h3 class="title text-center fw-bold fs-2 mb-5">Наши чайные коллекции</h3>
+    <div class="cards-wrap">
+      <div class="row col gy-4">
+        <div class="card-wrap col-12 col-md-6 col-xl-4" *ngFor="let product of products">
+          <product-card [product]="product"></product-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <loader-component *ngIf="showLoader"></loader-component>
+</section>
+
+

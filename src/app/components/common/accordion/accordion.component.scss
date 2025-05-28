@@ -1,0 +1,50 @@
+.accordion-wrapper {
+  border: 1px solid black;
+  border-radius: 11px;
+  overflow: hidden;
+  transition: all .3s ease;
+  max-width: 850px;
+  display: block;
+  margin: 0 auto 10px;
+}
+
+.accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(13, 110, 253);
+  text-align: center;
+  padding: 15px;
+  cursor: pointer;
+  &:hover .accordion-arrow {
+    fill: #d3d3d3
+  }
+}
+
+.accordion-title {
+  color: white;
+  margin: 0;
+}
+
+.accordion-button {
+  background-color: transparent;
+  border: none;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.accordion-arrow {
+  fill: white;
+  width: 25px;
+  height: 25px;
+  transition: all 0.3s ease;
+
+}
+
+.accordion-description {
+  border-top: 0;
+  padding: 15px;
+  margin: 0;
+}
