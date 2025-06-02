@@ -11,7 +11,7 @@ export class SliderService {
       {
         image: '1.png',
         title: 'Скидки на травяные чаи',
-        description: 'Узнай все подробности, выберов чай и заполнив заявку',
+        description: 'Узнай все подробности, выбрав чай и заполнив заявку',
         textButton: 'Каталог'
       },
       {
