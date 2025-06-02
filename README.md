@@ -1,27 +1,66 @@
-# TeaShop
+# 🍵 Tea Shop
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.13.
+Интернет-магазин по продаже чая, созданный с использованием Angular. Включает главную страницу со слайдером и аккордеоном, каталог товаров, фильтрацию по поиску и оформление заказа.
 
-## Development server
+## 🔧 Технологии
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Angular 14**  
+- **TypeScript**  
+- **RxJS (Subjects, Observables)**  
+- **SCSS**  
+- **HTML5**
 
-## Code scaffolding
+## 🚀 Функционал
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Главная страница со слайдером и аккордеоном  
+- Просмотр каталога чая  
+- Поиск и фильтрация товаров  
+- Оформление заказа
+- Лоадер 
+- Адаптивная вёрстка
 
-## Build
+## 🖼️ Скриншоты
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+_Скриншоты интерфейса:_
 
-## Running unit tests
+<!-- Пример: -->
+![Главная страница](https://github.com/BazhenovDev/tea-shop/blob/main/src/assets/images/github/main.jpg)
+![Каталог](https://github.com/BazhenovDev/tea-shop/blob/main/src/assets/images/github/catalog.jpg)
+![Страница продукта](https://github.com/BazhenovDev/tea-shop/blob/main/src/assets/images/github/product.jpg)
+![Оформление заказа](https://github.com/BazhenovDev/tea-shop/blob/main/src/assets/images/github/order.jpg)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 🛠 Установка и запуск
 
-## Running end-to-end tests
+```bash
+# 1. Клонировать репозиторий
+git clone https://github.com/BazhenovDev/tea-shop.git
+cd tea-shop
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+# 2. Установить зависимости
+npm install
 
-## Further help
+# 3. Запустить проект
+ng serve -o
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# 4. Перейти в браузере по адресу
+http://localhost:4200
+```
+
+## 📁 Структура проекта
+
+```text
+src/
+├── app/
+│   ├── components/         # Все компоненты
+│   │   ├── common/         # Общие компоненты (хедер, футер и т.д.)
+│   │   └── pages/          # Основные страницы (главная, каталог, карточка товара, оформление заказа)
+│   ├── services/           # Сервисы (работа с данными, Subject)
+│   ├── types/              # Шаблоны типов данных
+│   ├── app-routing.module.ts
+│   ├── app.component.html
+│   └── app.module.ts
+└── assets/
+    └── images/             # Изображения
+```
+
+
