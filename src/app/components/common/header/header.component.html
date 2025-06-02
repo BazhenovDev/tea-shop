@@ -16,8 +16,10 @@
           </li>
         </ul>
         <form class="d-flex" role="search">
+
           <input class="form-control me-2" type="search" placeholder="Поиск чая" aria-label="Search" [formControl]="searchInput">
           <button class="btn btn-outline-success" type="button" (click)="searchProducts()">Найти</button>
+          <button type="button" class="btn btn-outline-danger btn-clear" *ngIf="this.searchInput.value" (click)="clearSearchParam()">Сбросить</button>
         </form>
       </div>
     </div>

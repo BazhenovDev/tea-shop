@@ -64,7 +64,7 @@ export class SliderComponent implements OnInit, OnDestroy {
     }
     this.interval = window.setInterval(() => {
       this.goToNextSlide();
-    }, 3000)
+    }, 5000)
   }
 
   ngOnDestroy(): void {

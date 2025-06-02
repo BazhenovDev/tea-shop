@@ -6,13 +6,6 @@ body {
   font-family: Arial, sans-serif;
 }
 
-app-root {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
-}
-
 .nav-link.active {
   opacity: 1 !important;
 }

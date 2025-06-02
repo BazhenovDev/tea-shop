@@ -1,7 +1,7 @@
 <section class="order py-4">
   <div class="container">
     <h3 class="title text-center fw-bold fs-2 mb-5">Сделать заказ</h3>
-    <form class="row g-3" id="mainForm" [formGroup]="orderForm">
+    <form class="row g-3" id="mainForm" [formGroup]="orderForm" (ngSubmit)="sendForm()">
       <label class="col-12 col-lg-6 offset-lg-3 form-label">
         <span>Товар</span>
         <input type="text" class="form-control" id="productName" formControlName="productName" [readonly]="isProductNameReadonly" [class.disabled]="isProductNameReadonly">
@@ -27,10 +27,10 @@
       </label>
       <label class="col-12 col-lg-2 form-label">
         <span>Телефон</span>
-        <input type="text" class="form-control" id="inputPhone" formControlName="phone">
+        <input type="text" class="form-control" id="inputPhone" formControlName="phone" (keydown)="banLetter($event)">
         <div *ngIf="phone?.invalid && (phone?.touched || phone?.dirty)">
           <p class="form-error" *ngIf="phone?.errors?.['required']">Введите номер телефона</p>
-          <p class="form-error" *ngIf="phone?.errors?.['pattern']">Номер введёт неккоректно</p>
+          <p class="form-error" *ngIf="phone?.errors?.['pattern']">Номер должке содержать 11 цифр</p>
         </div>
       </label>
       <label class="col-12 col-lg-3 offset-lg-3 form-label">
@@ -64,11 +64,10 @@
         <textarea type="text" class="form-control" id="descriptionOrder" formControlName="comment"></textarea>
       </label>
       <div class="col-2 offset-lg-3">
-        <button type="button" class="btn btn-primary hvr-pulse-shrink" id="btnForm" (click)="sendForm()" #formButton>Отправить
+        <button class="btn btn-primary hvr-pulse-shrink" id="btnForm" #formButton>Отправить
         </button>
       </div>
     </form>
-
 
     <div class="order-text text-center fs-1 d-none">
       <p class="text text-primary fw-bold">Спасибо за заказ. <span class="d-block text-danger">Мы свяжемся с вами в ближайшее время!</span>
@@ -79,7 +78,7 @@
 
 <div class="modal" #modal>
   <div class="modal-wrapper">
-    <p class="modal-text" #modalText>ТЕКСТ</p>
+    <p class="modal-text" #modalText></p>
     <button class="modal-button" (click)="closeModal()">Закрыть</button>
   </div>
 </div>

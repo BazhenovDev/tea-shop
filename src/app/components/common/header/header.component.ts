@@ -1,6 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {FormControl} from "@angular/forms";
+import {SearchService} from "../../../services/search.service";
 
 @Component({
   selector: 'header-component',
@@ -12,14 +13,16 @@ export class HeaderComponent implements OnInit {
   showMenu: boolean = false;
   private isMobile: boolean = window.innerWidth <= 991;
 
-  searchInput = new FormControl('');
+  searchInput: FormControl<string | null> = new FormControl('');
 
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.isMobile = window.innerWidth <= 991;
   }
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private searchService: SearchService) {
+
   }
 
   ngOnInit(): void {
@@ -32,16 +35,38 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  // Код через productService
+  // searchProducts() {
+  //   if (this.searchInput.value) {
+  //     this.router.navigate([`catalog`], {
+  //       queryParams: {
+  //         search: this.searchInput.value
+  //       }
+  //     });
+  //   } else if (this.searchInput.value === null || this.searchInput.value === '') {
+  //     this.router.navigate([`catalog`])
+  //   }
+  // }
+  // clearSearchParam() {
+  //   this.searchInput.setValue('');
+  //   this.router.navigate([`catalog`]);
+  // }
+
+
+  // Код через Subject
   searchProducts() {
     if (this.searchInput.value) {
-      this.router.navigate([`catalog`], {
-        queryParams: {
-          search: this.searchInput.value
-        }
-      });
-    } else {
       this.router.navigate([`catalog`])
+      this.searchService.updateSearch(this.searchInput.value);
+    } else if (this.searchInput.value === null || this.searchInput.value === '') {
+      this.router.navigate([`catalog`])
+      this.searchService.updateSearch('');
     }
+  }
+  clearSearchParam() {
+    this.searchInput.setValue('');
+    this.router.navigate([`catalog`]);
+    this.searchService.updateSearch('');
   }
 
 }

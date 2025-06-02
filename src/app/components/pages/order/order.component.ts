@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {OrderService} from "../../../services/order.service";
 
@@ -29,6 +29,7 @@ export class OrderComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private orderService: OrderService,
+    private router: Router,
   ) {
   }
 
@@ -36,7 +37,7 @@ export class OrderComponent implements OnInit, OnDestroy {
     productName: ['', [Validators.required]],
     firstName: ['', [Validators.required, Validators.pattern(/^[А-ЯЁа-яё]{2,}/)]],
     lastName: ['', [Validators.required, Validators.pattern(/^[А-ЯЁа-яё]{2,}/)]],
-    phone: ['', [Validators.required, Validators.pattern(/^(?:\+7|8)(?:\(?\d{3}\)?)(?:\d{3})(?:-?\d{2}){2}$/)]],
+    phone: ['', [Validators.required, Validators.pattern(/^(?:\+*\d{1})(?:\(?\d{3}\)?)(?:\d{3})(?:-?\d{2}){2}$/)]],
     country: ['', [Validators.required, Validators.pattern(/^[А-ЯЁа-яё]{5,}/)]],
     zip: ['', [Validators.required, Validators.pattern(/[0-9]{6}/)]],
     address: ['', [Validators.required, Validators.pattern(/^([А-ЯЁа-яё]*\s*[0-9]*\\*\-*\/*\.*)*$/)]],
@@ -85,36 +86,49 @@ export class OrderComponent implements OnInit, OnDestroy {
     });
   }
 
+  redirectToCatalog: boolean = false;
+
   sendForm():void {
     if (this.orderForm.valid) {
       this.formButton.nativeElement.setAttribute('disabled', 'disabled');
+      const formValue = this.orderForm.value;
       this.subscriptionOrder = this.orderService.sendOrder({
-        name: this.firstName!.value!,
-        last_name: this.lastName!.value!,
-        phone: this.phone!.value!,
-        country: this.country!.value!,
-        zip: this.zip!.value!,
-        product: this.productName!.value!,
-        address: this.address!.value!,
-        comment: this.comment!.value!,
+        name: formValue.firstName || '',
+        last_name: formValue.lastName || '',
+        phone: formValue.phone || '',
+        country: formValue.country || '',
+        zip: formValue.zip || '',
+        product: formValue.productName || '',
+        address: formValue.address || '',
+        comment: formValue.comment || '',
       }).subscribe({
         next: (response) => {
           if (response.success === 1 && !response.message) {
             console.log('заказ успешно оформлен', response);
             this.modalText.nativeElement.textContent = 'Спасибо за заказ!';
+            this.redirectToCatalog = true;
             this.showModal()
             this.orderForm.reset();
           } else {
             this.modalText.nativeElement.textContent = response?.message;
-            this.showModal()
+            this.redirectToCatalog = false;
+            this.showModal();
           }
         },
         error: (error) => {
+          this.redirectToCatalog = false;
           this.modalText.nativeElement.textContent = 'Произошла ошибка. Попробуйте еще раз.';
           this.showModal()
           console.log(error);
         }
       })
+    } else {
+      this.firstName?.markAsDirty()
+      this.lastName?.markAsDirty()
+      this.phone?.markAsDirty()
+      this.country?.markAsDirty()
+      this.zip?.markAsDirty()
+      this.address?.markAsDirty()
     }
   }
 
@@ -123,8 +137,17 @@ export class OrderComponent implements OnInit, OnDestroy {
     this.formButton.nativeElement.removeAttribute('disabled');
   }
 
-  closeModal() {
+  closeModal(): void {
     this.modal.nativeElement.style.display = 'none';
+    if (this.redirectToCatalog) {
+      this.router.navigate(['catalog']);
+    }
+  }
+
+  banLetter(event: KeyboardEvent): void {
+    if (event.key && event.key.match(/^[a-zA-ZА-Яёа-яё]$/g)) {
+      event.preventDefault();
+    }
   }
 
   ngOnDestroy(): void {

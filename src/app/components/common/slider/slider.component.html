@@ -13,7 +13,9 @@
       </svg>
     </button>
   </article>
-  <img src="../../../../assets/images/slider/{{this.currentSlide.image}}" alt="slider image - {{this.currentSlideIndex}}">
+  <picture>
+    <img src="../../../../assets/images/slider/{{this.currentSlide.image}}" alt="slider image - {{this.currentSlideIndex}}">
+  </picture>
   <article class="slider-info">
     <h2 class="slider-title" *ngIf="this.currentSlide.title">{{this.currentSlide.title}}</h2>
     <p class="slider-description" *ngIf="this.currentSlide.description">{{this.currentSlide.description}}</p>
