@@ -20,4 +20,8 @@ export class SearchService {
     this.getProductsSubject.next(this.queryParams);
   }
 
+  getSearch() {
+    return this.queryParams;
+  }
+
 }

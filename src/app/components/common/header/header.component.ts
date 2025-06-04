@@ -13,7 +13,8 @@ export class HeaderComponent implements OnInit {
   showMenu: boolean = false;
   private isMobile: boolean = window.innerWidth <= 991;
 
-  searchInput: FormControl<string | null> = new FormControl('');
+  // searchInput: FormControl<string | null> = new FormControl('');
+  searchInput: FormControl = new FormControl<string>('', { nonNullable: true });
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -55,10 +56,11 @@ export class HeaderComponent implements OnInit {
 
   // Код через Subject
   searchProducts() {
-    if (this.searchInput.value) {
-      this.router.navigate([`catalog`])
-      this.searchService.updateSearch(this.searchInput.value);
-    } else if (this.searchInput.value === null || this.searchInput.value === '') {
+    const searchValue: string = this.searchInput.value;
+    if (searchValue) {
+      this.router.navigate([`catalog`], {queryParams: {search: searchValue}});
+      this.searchService.updateSearch(searchValue);
+    } else if (!searchValue) {
       this.router.navigate([`catalog`])
       this.searchService.updateSearch('');
     }

@@ -10,7 +10,6 @@ export class ProductService {
   }
 
   getProducts(queryParams: string): Observable<ProductType[]> {
-    console.log('Product service: ', queryParams);
     const url: string = 'https://testologia.ru/tea';
     return queryParams
       ? this.http.get<ProductType[]>(`${url}?search=${queryParams}`)

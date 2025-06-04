@@ -15,12 +15,14 @@ export class CatalogComponent implements OnInit, OnDestroy {
   private getProductSubscription: Subscription | null = null;
   private queryParamSubscription: Subscription | null = null;
 
-  private searchSubscription: Subscription | null = null;
+  private searchSubscription: Subscription  = new Subscription();
   private queryParams: string = ''
   public titlePage: string = 'Наши чайные коллекции'
 
-  products: ProductType[] = [];
-  showLoader: boolean = false;
+  public products: ProductType[] = [];
+  public showLoader: boolean = false;
+
+
 
 
   constructor(private productService: ProductService,
@@ -66,39 +68,48 @@ export class CatalogComponent implements OnInit, OnDestroy {
   // Код с Subject
   ngOnInit(): void {
     this.showLoader = true;
-
-    this.getProductSubscription = this.productService.getProducts('').subscribe({
-      next: data => {
-        this.products = data;
-        this.showLoader = false;
-      }
-    })
-
-    this.searchSubscription = this.searchService.getProductsSubject.subscribe({
-        next: params => {
-          this.showLoader = true;
-          this.queryParams = params ? params : '';
-          this.getProductSubscription = this.productService.getProducts(this.queryParams)
-            .subscribe({
-              next: data => {
-                this.products = data
-
-                this.products.length === 0
-                  ? this.titlePage = 'Ничего не найдено'
-                  : this.queryParams
-                    ? this.titlePage = `Результаты поиска по запросу: "${this.queryParams}"`
-                    : this.titlePage = 'Наши чайные коллекции'
-
-                this.showLoader = false;
-              }, error: (error) => {
-                this.router.navigate(['/'])
-                console.log(error);
-              }
-            })
-        }
-      }
+    this.searchSubscription.add(
+      this.searchService.getProductsSubject
+        .subscribe({
+          next: (params: string) => {
+            this.queryParams = params || '';
+            this.loadProducts();
+          },
+          error: err => {
+            this.router.navigate(['']);
+            console.error(`ОШИБКА: ${err}`);
+          }
+        })
     )
+    this.loadProducts();
+  }
 
+  loadProducts(): void {
+    this.showLoader = true;
+    this.searchSubscription.add(
+      this.productService.getProducts(this.queryParams).subscribe({
+        next: (data: ProductType[]) => {
+          this.products = data;
+          this.updateTitle()
+          this.showLoader = false;
+        },
+        error: err => {
+          console.error(`ОШИБКА: ${err}`);
+          this.showLoader = false;
+          this.router.navigate(['/']);
+        }
+      })
+    )
+  }
+
+  updateTitle(): void {
+    if (this.products.length === 0) {
+      this.titlePage = 'Ничего не найдено'
+    } else if (this.queryParams) {
+      this.titlePage = `Результаты поиска по запросу: "${this.queryParams}"`
+    } else {
+      this.titlePage = 'Наши чайные коллекции'
+    }
   }
 
   ngOnDestroy(): void {
