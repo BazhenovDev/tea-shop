@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {LayoutComponent} from "./views/layout.component";
-import {NotFoundComponent} from "./views/not-found/not-found.component";
 
 const routes: Routes = [
   {
@@ -15,8 +14,8 @@ const routes: Routes = [
       { path: 'catalog', loadChildren: () => import('./views/product/product.module').then(m => m.ProductModule) },
     ]
   },
-  {path: '**', redirectTo: '404'},
 
+  {path: '**', redirectTo: '404'},
 ];
 
 @NgModule({

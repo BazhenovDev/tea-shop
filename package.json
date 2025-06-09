@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "my-build": "ng build --output-path docs --base-href /tea-shop/"
   },
   "private": true,
   "dependencies": {
