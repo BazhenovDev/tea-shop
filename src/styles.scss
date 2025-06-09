@@ -1,5 +1,5 @@
 html, body {
-  height: 100vh;
+  height: 100%;
 }
 
 body {
@@ -32,4 +32,4 @@ body {
 }
 
 /* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+@import 'bootstrap/scss/bootstrap';
