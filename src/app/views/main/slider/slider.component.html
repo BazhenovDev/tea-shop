@@ -14,11 +14,11 @@
     </button>
   </article>
   <picture>
-    <img src="../../../../assets/images/slider/{{this.currentSlide.image}}" alt="slider image - {{this.currentSlideIndex}}">
+    <img src="../../../../assets/images/slider/{{ currentSlide.image}}" alt="slider image - {{currentSlideIndex}}">
   </picture>
   <article class="slider-info">
-    <h2 class="slider-title" *ngIf="this.currentSlide.title">{{this.currentSlide.title}}</h2>
-    <p class="slider-description" *ngIf="this.currentSlide.description">{{this.currentSlide.description}}</p>
+    <h2 class="slider-title" *ngIf="currentSlide.title">{{currentSlide.title}}</h2>
+    <p class="slider-description" *ngIf="currentSlide.description">{{currentSlide.description}}</p>
   </article>
-  <a routerLink="catalog" class="slider-link" *ngIf="this.currentSlide.textButton">{{this.currentSlide.textButton}}</a>
+  <a routerLink="catalog" class="slider-link" *ngIf="currentSlide.textButton">{{currentSlide.textButton}}</a>
 </figure>
