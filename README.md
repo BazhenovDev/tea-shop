@@ -10,6 +10,7 @@
 - **RxJS (Subjects, Observables)**  
 - **SCSS**  
 - **HTML5**
+- **Ng Bootstrap**
 
 ## 🚀 Функционал
 
